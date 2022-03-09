@@ -10,8 +10,7 @@ model = VGG16()
 
 img_file_buffer = st.file_uploader('Upload image to be predicted: ', type=['png','jpg','jpeg'])
 if img_file_buffer is not None:
-    image_data = img_file_buffer.read()
-    img = Image.open(image_data)
+    image = Image.open(img_file_buffer)
 
 col1, col2, col3 = st.columns(3)
 
