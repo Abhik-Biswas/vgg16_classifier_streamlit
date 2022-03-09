@@ -9,8 +9,8 @@ from keras.applications.vgg16 import decode_predictions
 model = VGG16()
 
 img_file_buffer = st.file_uploader('Upload image to be predicted: ', type=['png','jpg','jpeg'])
-if img_file_buffer is not None:
-    image = Image.open(img_file_buffer)
+#if img_file_buffer is not None:
+    #image = Image.open(img_file_buffer)
 
 col1, col2, col3 = st.columns(3)
 
@@ -23,7 +23,7 @@ with col2:
 with col3:
     st.write(' ')
 
-image = keras.preprocessing.image.load_img(image, target_size=(224, 224))
+image = keras.preprocessing.image.load_img(img_file_buffer, target_size=(224, 224))
 image = keras.preprocessing.img_to_array(image)
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 image = preprocess_input(image)
