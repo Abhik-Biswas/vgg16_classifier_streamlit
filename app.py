@@ -23,7 +23,7 @@ with col2:
 with col3:
     st.write(' ')
 
-image = keras.preprocessing.image.load_img(img, target_size=(224, 224))
+image = keras.preprocessing.image.load_img(image, target_size=(224, 224))
 image = keras.preprocessing.img_to_array(image)
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 image = preprocess_input(image)
