@@ -8,9 +8,20 @@ from keras.applications.vgg16 import decode_predictions
 
 model = VGG16()
 
-img_file_buffer = st.file_uploader('Upload image to be predicted: ', type=['png','jpg','jpeg'])
-if img_file_buffer is not None:
-    image = Image.open(img_file_buffer)
+from keras.preprocessing.image import load_img
+
+import streamlit as st
+
+from tempfile import NamedTemporaryFile
+
+st.set_option('deprecation.showfileUploaderEncoding', False)
+
+buffer = st.file_uploader("Image here pl0x")
+temp_file = NamedTemporaryFile(delete=False)
+if buffer:
+    temp_file.write(buffer.getvalue())
+    image = keras.preprocessing.image.load_img(temp_file.name, target_size=(224,224))
+    #st.write(load_img(temp_file.name))
 
 col1, col2, col3 = st.columns(3)
 
@@ -23,7 +34,7 @@ with col2:
 with col3:
     st.write(' ')
 
-image = keras.preprocessing.image.load_img(image, target_size=(224, 224))
+#image = keras.preprocessing.image.load_img(image, target_size=(224, 224))
 image = keras.preprocessing.img_to_array(image)
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 image = preprocess_input(image)
