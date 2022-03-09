@@ -1,3 +1,4 @@
+import numpy as np
 import streamlit as st
 from keras.applications.vgg16 import VGG16
 from PIL import Image
@@ -10,6 +11,7 @@ model = VGG16()
 img_file_buffer = st.file_uploader('Upload image to be predicted: ', type=['png','jpg','jpeg'])
 if img_file_buffer is not None:
     image = Image.open(img_file_buffer)
+    image = np.array(image)
 
 col1, col2, col3 = st.columns(3)
 
@@ -22,8 +24,8 @@ with col2:
 with col3:
     st.write(' ')
 
-image = keras.preprocessing.image.load_img(image, target_size=(224, 224))
-image = keras.preprocessing.img_to_array(image)
+#image = keras.preprocessing.image.load_img(image, target_size=(224, 224))
+#image = keras.preprocessing.img_to_array(image)
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 image = preprocess_input(image)
 y_hat = model.predict(image)
